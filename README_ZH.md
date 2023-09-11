@@ -28,16 +28,16 @@ interpreter
 
 <br>
 
-**开放解释器** 允许LLMs在本地运行代码（Python、Javascript、Shell等）。安装后，通过在终端中运行 `$ interpreter`，您可以通过类似ChatGPT的界面与开放解释器聊天。
+**开放解释器** 允许 LLMs 在本地运行代码（Python、Javascript、Shell 等）。安装后，通过在终端中运行 `$ interpreter`，您可以通过类似 ChatGPT 的界面与开放解释器聊天。
 
 这为您的计算机的通用功能提供了自然语言界面：
 
-- 创建和编辑照片、视频、PDF等。
-- 控制Chrome浏览器进行研究
+- 创建和编辑照片、视频、PDF 等。
+- 控制 Chrome 浏览器进行研究
 - 绘制、清理和分析大型数据集
 - ...等等。
 
-**⚠️ 注意：在代码运行之前，您会被要求批准。**
+**⚠️ 注意：在运行之前，您会被要求批准代码。**
 
 <br>
 
@@ -45,7 +45,7 @@ interpreter
 
 https://github.com/KillianLucas/open-interpreter/assets/63927363/37152071-680d-4423-9af3-64836a6f7b60
 
-#### Google Colab上也提供了交互式演示：
+#### Google Colab 上也提供了交互式演示：
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1WKmRXZgsErej2xUriKzxrEAXdxMSgWbb?usp=sharing)
 
@@ -57,7 +57,7 @@ pip install open-interpreter
 
 ### 终端
 
-安装后，简单地运行 `interpreter`：
+安装后，只需运行 `interpreter`：
 
 ```shell
 interpreter
@@ -72,21 +72,22 @@ interpreter.chat("Plot AAPL and META's normalized stock prices") # 执行单一�
 interpreter.chat() # 开始交互式聊天
 ```
 
-## 与ChatGPT的代码解释器比较
+## 与 ChatGPT 的代码解释器比较
 
-OpenAI发布的 [Code Interpreter](https://openai.com/blog/chatgpt-plugins#code-interpreter) 和 GPT-4 提供了一个与ChatGPT完成实际任务的绝佳机会。
+OpenAI 发布的 [Code Interpreter](https://openai.com/blog/chatgpt-plugins#code-interpreter) 和 GPT-4 提供了一个与 ChatGPT 完成实际任务的绝佳机会。
 
-但是，OpenAI的服务是托管的，闭源的，并且受到严格限制：
+但是，OpenAI 的服务是托管的，闭源的，并且受到严格限制：
+
 - 没有互联网访问。
 - [预装包限制](https://wfhbrian.com/mastering-chatgpts-code-interpreter-list-of-python-packages/)。
-- 最大上传100 MB，运行时间限制为120.0秒。
+- 最大上传 100 MB，运行时间限制为 120.0 秒。
 - 当环境死亡时，状态会被清除（以及任何生成的文件或链接）。
 
 ---
 
 开放解释器通过在您的本地环境上运行来克服这些限制。它可以完全访问互联网，不受时间或文件大小的限制，并可以使用任何包或库。
 
-这结合了GPT-4的代码解释器的功能和您的本地开发环境的灵活性。
+这结合了 GPT-4 的代码解释器的功能和您的本地开发环境的灵活性。
 
 ## 命令
 
@@ -98,7 +99,7 @@ OpenAI发布的 [Code Interpreter](https://openai.com/blog/chatgpt-plugins#code-
 interpreter
 ```
 
-或者从.py文件中运行 `interpreter.chat()`：
+或者从.py 文件中运行 `interpreter.chat()`：
 
 ```python
 interpreter.chat()
@@ -111,7 +112,7 @@ interpreter.chat()
 ```python
 interpreter.chat("Add subtitles to all videos in /videos.")
 
-# ... Streams output to your terminal, completes task ...
+# ... 终端会输出数据流，以完成任务 ...
 
 interpreter.chat("These look great but can you make the subtitles bigger?")
 
@@ -120,7 +121,7 @@ interpreter.chat("These look great but can you make the subtitles bigger?")
 
 ### 开始新的聊天
 
-在Python中，开放解释器会记住对话历史。如果您想重新开始，您可以重置它：
+在 Python 中，开放解释器会记住对话历史。如果您想重新开始，您可以重置它：
 
 ```python
 interpreter.reset()
@@ -150,14 +151,6 @@ print(interpreter.system_message)
 
 ### 更改模型
 
-ⓘ **在本地运行时遇到问题？** 阅读我们的新 [GPU设置指南](/docs/GPU.md) 和 [Windows设置指南](/docs/WINDOWS.md)。
-
-您可以从命令行在本地模式下运行 `interpreter` 以使用 `Code Llama`：
-
-```shell
-interpreter --local
-```
-
 对于 `gpt-3.5-turbo`，使用快速模式：
 
 ```shell
@@ -169,6 +162,28 @@ interpreter --fast
 ```python
 interpreter.model = "gpt-3.5-turbo"
 ```
+
+### 在本地运行开放解释器
+
+ⓘ **在本地运行时遇到问题？** 阅读我们的新 [GPU 设置指南](/docs/GPU.md) 和 [Windows 设置指南](/docs/WINDOWS.md)。
+
+您可以从命令行在本地模式下运行 `interpreter` 以使用 `Code Llama`：
+
+```shell
+interpreter --local
+```
+
+或者通过 repo ID 在本地运行任何 Huggin Face 的模型 （如 "tiiuae/falcon-180B"）
+
+```shell
+interpreter --model tiiuae/falcon-180B
+```
+
+#### 本地模型参数
+
+您可以很容易地修改本地运行模拟行的`max_tokens`以及`context_window`。
+
+小的上下文窗口将会使用更少的内存, 所以我们建议尝试小的上下文窗口如果 GPU 无法正常工作。
 
 ### Azure 支持
 
@@ -191,7 +206,7 @@ interpreter.azure_api_type = "azure"
 
 ### 调试模式
 
-为了帮助贡献者查看 Open Interpreter，`--debug` 模式非常详细。
+为了帮助贡献者查看 Open Interpreter，`--debug` 模式下的输出将会及其冗长。
 
 您可以通过使用它的标志激活调试模式（`interpreter --debug`），或在聊天中间：
 
@@ -246,13 +261,14 @@ Open Interpreter 配备了一个 [函数调用语言模型](https://platform.ope
 Open Interpreter 根据 MIT 许可证授权。您被允许使用、复制、修改、分发、再许可并出售软件副本。
 
 **注意**：此软件与 OpenAI 无关。
+
 > 有一个速度如指尖般快速工作的初级程序员的访问权限... 可以使新的工作流程变得轻而易举和高效，同时还可以为新的受众带来编程的好处。
 >
-> — _OpenAI的代码解释器发布_
+> — _OpenAI 的代码解释器发布_
 
 <br>
 <br>
 <br>
 
 **注意**：此翻译是由人工智能创建的。我们确信它包含了一些不准确之处。
-请通过为我们提供您的纠正意见的拉取请求，帮助Open Interpreter走向世界各地！
+请通过为我们提供您的纠正意见的拉取请求，帮助 Open Interpreter 走向世界各地！
